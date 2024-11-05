@@ -1,0 +1,99 @@
+NodeJs is just a run-time environment for JavaScript 
+
+RYAN DHAL takes the chrome V8 engine integrates it with C++ and calls it NOdeJS
+so now we can run or use JavaScript outside of Chrome
+NodeJs don't have the UI-related JavaScript functionality 
+
+VERSION
+LTS = Long Time Support (even no of the version)
+Current 
+
+npm (Node Package Manager)
+
+To run the JavaScript in the terminal 
+node file_name.js || node file_name
+
+-------------------------------------------------------------------------------
+
+npm init
+is a configuration file of our project
+used to create a package that handles all our node.js files along with all our repository versions git repo etc 
+
+{
+  "name": "javascr",
+  "version": "1.0.0",
+  "main": "first.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node first.js"				// can make custom path
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
+
+now you can run the .js file using the 
+npm run start 				//"start" defined in scripts
+
+-------------------------------------------------------------------------------
+
+MODULES 
+same as import"./path";	
+
+maths.js
+function add(a, b) {
+    return a + b;
+}
+function sub(a, b) {
+    return a - b;
+}
+//for exporting multiple function 
+module.exports = {
+    addFun: add,
+    subFun: sub,
+};
+exports.mul = multiplier = (a, b) => a * b;         //Inline export
+
+first.js
+const math = require("./maths");		// "./" for local file
+console.log("Helo World");
+console.log(math.addFun(5, 10));
+console.log(math.subFun(50, 10));
+console.log(multiplier(50, 10));
+
+-------------------------------------------------------------------------------
+
+FILE HANDLING : 
+
+const fs = require("fs");
+//Asyncronus way
+fs.writeFile("./demo.txt", "I ma tryinfg to access");
+
+//Syncronous way
+//Blocking task
+fs.writeFileSync("./demo.txt", "I ma tryinfg to access", (error) => { });
+
+//synchronous read (RETURN THE DATa)
+const res = fs.readFileSync("./demo.txt", "utf-8");
+console.log(res);
+
+
+//Asynchronous read 
+fs.readFile("./deo.txt", "utf8", (err, data) => {
+    if (err)
+        console.log(err);
+    if (data)
+        console.log(data);
+});
+
+-------------------------------------------------------------------------------
+
+NODE JS ARCHITECTURE:
+
+Request -> Event Loop ->(if blocking)->Thread pool (limited threads)
+Default no of thread = 4
+to check no of threads -> console.log(os.cpus().length)
+
+-------------------------------------------------------------------------------
+
+g

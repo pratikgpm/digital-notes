@@ -1,0 +1,2259 @@
+Flutter Base Code (STATELESS):
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter mini 2',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+       primarySwatch: Colors.lightBlue,
+        useMaterial3: true,
+
+      ),
+      home: HomeScreen(),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Flutter Demo 2'),
+        backgroundColor: Colors.lightBlueAccent,
+      ),
+      body: Text('body'),
+    );
+  }
+}
+
+-----------------------------------------------------------------------
+
+STATEFULL SCREEN :
+
+import 'package:demos_4/util.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "Flutter Demos 3",
+      theme: ThemeData(
+        primarySwatch: Colors.lightBlue,
+        useMaterial3: true,
+      ),
+      home: HomeScreen(),
+    );
+  }
+}
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _State();
+}
+
+class _State extends State<HomeScreen> {
+  var password = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    var dat = DateTime.now();
+    return Scaffold(
+
+-----------------------------------------------------------------------
+
+1) Buttons : // onPresses:(){}
+OutlinedButton 
+TextButton
+ElevatedBtton
+
+-----------------------------------------------------------------------
+
+2) Adding images in the flutter project 
+
+create directory names as assets
+create one more directory in it name as images 
+where we are going to keep all our images
+Now go into the pubspec.yaml file 
+where you'll find #assets:
+remove the # and place assets under the # (to take care of indentation)
+now add your path below it 
+with - just bellow 2nd 's'
+ex :- assets:
+	- assets/images/
+and click "pub get"
+// Images.assets(assets/imnages/lo.jpg)
+
+-----------------------------------------------------------------------
+
+3] Colums and Rows :
+body: Row(
+mainAxisAlignment: MainAxisAlignment.spaceAround,
+crossAxisAlignment: CrossAxisAlignment.center,
+children :[
+//body 
+//Text("text_1")
+Row(
+mainAxisAlignment: MainAxisAlignment.spaceAround,
+crossAxisAlignment: CrossAxisAlignment.center,)
+children: [
+//body:
+])
+]
+
+-----------------------------------------------------------------------
+
+4] MARGIN:
+margin: EdgeInsets.symmetric(vertical: 20),
+margin: EdgeInsets.only(top: 20), // for individually 
+
+-----------------------------------------------------------------------
+
+5] InkWell:
+using this we can use use onTap() 
+
+Inkwell(
+onTap(){
+//code
+}
+child : Text("Click me")
+)
+
+-----------------------------------------------------------------------
+
+6] SingleChildScrollView :
+if we have different data items then we should use this ScrollView
+CODE :-
+ 
+body : Container(
+            margin: EdgeInsets.only(
+              top: 10,
+            ),
+            child: SingleChildScrollView(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+if we want to use this ScrollView for row then we need to add one more line of code 
+ie.
+child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+
+-----------------------------------------------------------------------
+
+7] LIST VIEW :-
+
+Plane list view for static data whick we manually put inside the list 
+
+body :
+ListView(
+//CODE 
+)
+
+LIST VIEW BUILDER :-
+
+ ListView.builder(itemBuilder: (context , index){
+
+ return Padding(
+ padding: const EdgeInsets.all(8.0),
+ child: Text(lis[index],style: TextStyle(fontWeight: FontWeight.w500,fontSize: 25),),
+ );
+},
+ itemCount: lis.length,
+// reverse: true,
+ scrollDirection: Axis.horizontal, ............(horizontal orientantation + itentExtent wrapUp the data in horizontal row )
+ itemExtent: 100,
+ )
+
+
+LIST VIEW SEPERATOR :-
+adds ----
+
+ body: ListView.separated(itemBuilder: (context , index){
+
+          return Padding(
+            padding: const EdgeInsets.only(left: 15.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(lis[index],style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500),),
+                Text("is Same as "),
+                Text(lis[index],style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),),
+              ],
+            ),
+          );
+        },
+        itemCount: lis.length,
+         separatorBuilder: (context,index){
+          return Divider(height: 40,thickness: 2,);
+         },
+        )
+      
+    );
+
+----------------------------------------------------------------------
+
+8] BOX DECORATIONS :
+
+ child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.orange,
+// for specific direction 
+borderRadius: BorderRadius.only(topLeft: 	Radius.circular(19),bottomRight: Radius.circular(19)),
+                ) ,
+
+//Also
+// for all directions 
+ borderRadius: BorderRadius.circular(10),
+
+BOX SHADDOW :-
+//inside the box decoration
+  boxShadow: [
+                      BoxShadow(
+                        blurRadius: 20,
+                        color: Colors.grey,
+                        blurStyle: BlurStyle.outer,
+
+                      )
+-----------------------------------------------------------------------
+
+9] EXPANDED :
+
+container / widget can be wrap up with this EXPANDED widget so that it can take maximum space availabl
+
+// because of this property we can not use this widget when we were  using Scroll view 
+
+FLEX :
+attribute to distribute space in proportion (1 -10)
+ ----------------------------------------------------------------------
+
+10] LIST TILE :
+
+this is the predefine recyclerView resembles with whats app chatting list 
+
+ListView.separated(
+          itemBuilder: (context, index) {
+            return ListTile(
+              //  leading: Image.asset('Assets/Images/self_image_gradient_background.jpg') ,
+              leading: Text("${index+1}" , style: TextStyle(fontSize: 20 ),),
+              title: Text(arrNames[index]),
+              subtitle: Text(" is the name"),
+              trailing: Icon(Icons.add),
+            );
+          },
+          itemCount: arrNames.length,
+          separatorBuilder: (context, index) {
+            return Divider(
+              thickness: 1,
+              height: 50,
+            );
+          },
+        )
+
+-----------------------------------------------------------------------
+
+11] CIRCLE AVATAR :
+
+ CircleAvatar(
+                child:
+                Text("hii",style: TextStyle(fontSize: 25),),
+                backgroundImage: AssetImage('Assets/Images/banner.jpg'),
+		radius: 50,
+                // maxRadius: 50,
+                // minRadius: 30,
+
+-----------------------------------------------------------------------12] CUSTOM FONT :
+
+In pubspec.yaml
+ 
+  fonts:
+    - family: FontMain
+      fonts:
+        - asset: Assets/Fonts/RobotoMono-Thin.ttf
+
+In main.dart 
+
+ Text("Last Seen 10.30 am.",style: TextStyle(fontSize: 15 , fontFamily: 'FontMain')),
+
+-----------------------------------------------------------------------
+
+13] STYLES AND THEMES :
+
+Defining theme parameter in Material app :-
+
+ Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "Flutter Demos 3",
+      theme: ThemeData(
+        primarySwatch: Colors.orange,
+        textTheme: TextTheme(
+          displayLarge: TextStyle(fontSize: 20, fontWeight: FontWeight.w500,color: Colors.blueGrey),
+          displayMedium: TextStyle(fontSize: 15,fontFamily : 'FontMain',),
+
+
+        ),
+        useMaterial3: true,
+      ),
+
+*** Using them in our body section ***
+
+title: Text(arrNames[index],style: Theme.of(context).textTheme.displayLarge),
+
+***Explicitely adding  other attributes or changing the given predefine values of theme***
+
+ subtitle: Text("Last Seen 10.30 pm.",style: Theme.of(context).textTheme.displayMedium!.copyWith(fontStyle: FontStyle.italic)),
+
+***To make multipe themes and keeping it seperate in another dart file in same lib folder ***
+
+import 'package:flutter/material.dart';
+
+TextStyle myTextStyle({
+  Color ttColor = Colors.blue, // defalut parameter
+  FontWeight ff = FontWeight.bold ,
+  FontStyle myStylr = FontStyle.italic,
+}){
+  return TextStyle(
+    color: ttColor,
+    FontWeight : ff ,
+    fontStyle: myStylr,
+  );
+}
+
+//main.dart
+ Text("Add", style: myTextStyle( ttColor: Colors.black,ff: FontWeight.normal,myStylr: FontStyle.normal),),
+
+-----------------------------------------------------------------------
+
+14] CARD :-
+Use with any widget such as Button , Text view , Container etc.
+Card(
+              shadowColor: Colors.black,
+              elevation: 2,
+              child: Text("Hello"),
+	)
+
+-----------------------------------------------------------------------
+
+15] EDIT TEXT :-
+
+TextField(
+                controller: password,
+                obscureText: true,
+                keyboardType: TextInputType.number,
+                obscuringCharacter: '*',
+                
+                decoration: InputDecoration(
+                    suffixStyle: TextStyle(fontSize: 10),
+                    hintStyle: TextStyle(color: Colors.grey),
+                    hintText: 'Password',
+                    suffixText: 'Weak Password',
+                    prefixIcon: Icon(
+                      Icons.lock,
+                      color: Colors.grey,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: BorderSide(
+                          color: Colors.orange,
+                          width: 2,
+                        )),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: BorderSide(
+                          color: Colors.lightGreen,
+                        )),
+                    disabledBorder: OutlineInputBorder(
+                        //  borderRadius: BorderRadius.circular(30),
+                        // so it follows the default square shape
+                        borderSide: BorderSide(
+                      color: Colors.red,
+                      width: 2,
+                    ))),
+              ),
+
+// for controller declaration and assign 
+
+class HomeScreen extends StatelessWidget {
+  HomeScreen({super.key});
+
+  var username = TextEditingController();
+
+// To get data from Edit Text 
+ElevatedButton(
+                    onPressed: () {
+                      var user = username.text.toString();
+                      var pass = password.text.toString();
+                      print("Username : -  $user Password :- $pass");
+                      username.clear();
+                    },
+
+-----------------------------------------------------------------------
+
+16] TIME AND DATE : 
+
+ @override
+  Widget build(BuildContext context) {
+    var dat = DateTime.now();
+    return Scaffold(
+
+child: Text(
+
+	'${dat.hour} : ${dat.minute} : ${dat.second} : \n               	 ${dat.day} : ${dat.month} : ${dat.year}',
+         style: TextStyle(fontSize: 15),
+         
+ ),
+
+IconButton(
+                    icon: Icon(Icons.refresh),
+                    onPressed: () {
+                     setState((){} // this method works only in
+                     );
+                    },
+                  ),
+
+-----------------------------------------------------------------------
+
+17] DATE PICKER :
+
+onPressed: () async {
+                      DateTime? datePicked = await  showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2025)
+                      );
+
+-----------------------------------------------------------------------
+
+18] TIME PICKER : 
+
+IconButton(
+	onPressed: () async {
+              TimeOfDay? td = await showTimePicker(
+                         context: context,
+                         initialTime: TimeOfDay.now(),
+                         initialEntryMode: TimePickerEntryMode.dial,
+                          );
+
+-----------------------------------------------------------------------
+
+19] GRID VIEW :
+
+// count wiae :-
+// grid count remains same in Landscape but size changes
+GridView.count(crossAxisCount: 3,
+      crossAxisSpacing: 2,
+      mainAxisSpacing: 2,
+      children: [
+        Container(
+          color: colorArray[0],
+        ),
+
+// Size wise :-
+// count changes in Landscape but size remains same 
+ body: GridView.extent(maxCrossAxisExtent: 80,
+      crossAxisSpacing: 2,
+      mainAxisSpacing: 2,
+      children: [
+        Container(
+          color: colorArray[0],
+        ),
+
+// Using Builder :-
+// with max size
+ body: GridView.builder(
+          itemBuilder: (context,index){
+        return Container(color: colorArray[index],);
+          },
+        itemCount: colorArray.length,
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 150,
+          crossAxisSpacing: 2,
+          mainAxisSpacing: 2,
+        ),
+      )
+
+// Builder with max element :-
+GridView.builder(
+        itemBuilder: (context,index){
+          return
+            Container(
+              color: colorArray[index],
+            );
+          },
+        itemCount: (colorArray.length),
+        
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,
+        mainAxisSpacing: 2,
+        crossAxisSpacing: 2,
+
+      ),)
+
+-----------------------------------------------------------------------
+
+20] PASSING FUNCTIONS : 
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    said (){
+      print('helo world');
+    }
+// USE 
+ InkWell( 
+              onTap: said,
+)
+
+-----------------------------------------------------------------------
+
+21] CUSTOM WIDGET :-
+
+//can choose any in StateLess/StateFull
+class LastBottom extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return  Expanded(
+      flex: 1,
+      child: Container(
+        color: Colors.purple,
+        child: ListView.builder(itemBuilder: (context,index){
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              width: 100,
+              color:  Colors.lightBlueAccent,
+            ),
+          );
+        },
+          itemCount: 10,
+          scrollDirection: Axis.horizontal,
+        ),
+      ),
+    );
+  }
+}
+
+// In body :-
+body: Column(
+          children: [
+            upperView(),
+
+-----------------------------------------------------------------------
+
+22] CUSTOM WIDGET :- 
+
+// In Lib folder make directory and place all custom widget there 
+class rounded extends StatelessWidget {
+  final String titl;
+  final Icon? icn;
+  final Color? clr;
+  final VoidCallback? callback;
+
+  //CONSTRUCTOR
+  rounded({
+    required this.titl,
+    this.icn,
+    this.callback,
+    this.clr = Colors.lightGreen,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        callback!();
+      },
+                         //(It will throw error if use "Null")
+      child: icn != null             
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                icn!,
+                Text(titl, style: myStyle(),),
+              ],
+            )
+          : Text(
+              titl,
+              style: myStyle(),
+            ),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: clr,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      ),
+    );
+  }
+}
+
+// In main. dart file 
+rounded(
+                icn: Icon(Icons.person,color: Colors.white,),
+                titl: 'Login',
+                callback: (){
+                  debugPrint('LOgin Click');
+                },
+
+              ),
+
+-----------------------------------------------------------------------
+
+23] STACK :-
+
+ Container(
+              width: 300,
+              height: 300,
+              color: Colors.lightGreen,
+             
+ child: Stack(
+                children: [
+                  Container(
+                    height: 200,
+                    width: 200,
+                    color: Colors.red,
+                  ),  //Container
+                 
+ Positioned(
+                    left: 30,
+                    top: 70,
+                    child: Container(
+                      height: 150,
+                      w idth: 150,
+                      color: Colors.orange,
+                    ),   //Container
+                  )	//Position
+
+                ],	
+              ),	//Stack
+            )		//Container
+
+-----------------------------------------------------------------------
+
+24] WRAP WIDGET :-
+
+ Wrap(
+          //direction: Axis.vertical,
+          spacing: 2,
+          runSpacing: 2,
+          alignment: WrapAlignment.center,
+          children: [
+            Container(
+              width: 120,
+              height: 120,
+              color: Colors.lightGreen,
+            ),
+
+-----------------------------------------------------------------------
+
+25] SIZE BOX :-
+
+ SizedBox.shrink(),
+ SizedBox.expand(),
+ SizedBox.square
+	(
+      dimension: 15,
+ 	  ),
+ SizedBox(
+     width: 15,
+     height: 15,
+            ),
+
+-----------------------------------------------------------------------
+
+26] RICH TEXT :
+
+RichText(
+            text: TextSpan(
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 20,
+                ),
+                children: <TextSpan>[
+                  TextSpan(text: 'Hello'),
+                  TextSpan(
+                      text: ' World!',
+                      style: TextStyle(
+                        color: Colors.lightBlue,
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 25,
+                      )),
+                  TextSpan(text: ' and rest Text is '),
+                  TextSpan(
+                      text: 'Here',
+                      style: TextStyle(
+                          color: Colors.orange,
+                          fontFamily: 'myCustom',
+                          fontSize: 35)),
+                ]),
+          ),
+
+-----------------------------------------------------------------------
+
+27] FONT AWSOME ICON :
+
+// Adding files in pubspace.ynl
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  font_awesome_flutter: '>= 4.7.0'
+
+// In main.dart
+ FaIcon(
+              FontAwesomeIcons.amazon,
+              size: 50,
+              color: Colors.grey,
+            ),
+
+-----------------------------------------------------------------------
+
+28] MAP :
+
+class _HomeScreenState extends State<HomeScreen> {
+  var names = [
+    'Ram Ji',
+    'Hanuman Ji',
+    'Siya',
+    'Laxman',
+    'Bharat',
+    'Dashrat',
+    'Janak',
+]
+
+ body: ListView(
+          children: names
+              .map((value) => Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                        color: Colors.lightBlue,
+                        child: Center(
+                            child: Text(
+                          value,
+                          style: TextStyle(fontSize: 20),
+                        ))),
+                  ))
+              .toList(),
+        ));
+
+
+MAPS WITH LISTTILES :
+
+class _HomeScreenState extends State<HomeScreen> {
+  var names = [
+    {
+      'name' : 'Pratik',
+      'phone' : '79770805',
+      'cou' : '5',
+    },
+    {
+      'name' : 'Raj',
+      'phone' : '7985805',
+      'cou' : '2',
+    },
+
+  body: ListView(
+     children: names.map((value) =>
+          ListTile(
+             leading: Icon(Icons.person),
+              title: Text(value['name'].toString()),
+              subtitle: Text(value['phone'].toString()),
+              trailing: CircleAvatar(
+              backgroundColor: Colors.green,
+              child: Padding(
+                   padding: const EdgeInsets.all(3.0),
+                   child: Center(child: Text(value['cou'].toString(),style: TextStyle(fontSize: 10,color: Colors.white),)),
+                 ),
+                 radius: 12,
+               ),
+
+         )).toList()
+        ));
+
+-----------------------------------------------------------------------
+
+29] CONSTRAIN BOX : 
+
+children: [
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxHeight: 150,
+                  maxWidth: 300,
+                  minHeight: 50,
+                  minWidth: 150,
+                ),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.lightBlue),
+                  onPressed: () {},
+                  child: Text('ns fhi'),
+                ),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: 100,
+                  minHeight: 50,
+                  maxWidth: 250,
+                  maxHeight: 100,
+                ),
+                child: Container(
+                  color: Colors.lightGreen,
+                  child: Text(
+                    'hii here is the app you want to eat or should I finiush by my ',
+                    style: TextStyle(overflow: TextOverflow.fade),
+                  ),
+                ),
+              )
+
+-----------------------------------------------------------------------
+
+30] SCREEN NAVIGATION :
+
+ onTap: (){
+ if(wt ==100 && ft ==4 && inc ==4){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SecondScreen()));
+                }
+}
+
+-----------------------------------------------------------------------
+
+31] FLASH SCREEN :
+
+class _Flash_ScreenState extends State<Flash_Screen> {
+  @override
+
+  void initState(){
+    super.initState();
+  Timer(Duration(seconds : 3),(){
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen(),));
+  });
+
+  }
+
+-----------------------------------------------------------------------
+
+32] PASSING DATA FROM ONE SCREEN TO OTHER :
+
+//using constructor
+import 'package:flutter/material.dart';
+
+class result_screen extends StatefulWidget {
+  var height;
+
+  var weight;
+  var answer;
+
+  var color_dot;
+  var foot;
+
+  var inches;
+
+  result_screen(this.weight, this.height, this.answer, this.color_dot) {}
+
+  @override
+  State<result_screen> createState() => _result_screenState();
+}
+
+class _result_screenState extends State<result_screen> {
+  @override
+  Widget build(BuildContext context) {
+
+IN PREVIOUS SCREEN :
+  Navigator.push(
+                   context,
+                    MaterialPageRoute(
+                     builder: (context) =>
+                     result_screen(wt, ht, d.toStringAsFixed(2), Col),
+                      ));
+                  setState(() {});
+                }
+              },
+
+-----------------------------------------------------------------------
+
+33] RANGESLIDER :
+
+class _HomeScreenState extends State<HomeScreen> {
+  RangeValues values = RangeValues(0, 100);
+@override
+  Widget build(BuildContext context) {
+    RangeLabels label =
+        RangeLabels(values.start.toString(), values.end.toString());
+ 
+return Scaffold(
+ body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            RangeSlider(
+              values: values,
+              labels: label,
+              min: 0,
+              max: 100,
+              divisions: 10,
+              activeColor: Colors.orange,
+              inactiveColor: Colors.orange.shade200,
+              onChanged: (newValues) {
+                values = newValues;
+                widget.st = newValues.start.toString();
+                widget.ed = newValues.end.toString();
+
+                setState(() {});
+              },
+            ),
+            Text('MIN : ${widget.st} and MAX : ${widget.ed}'),
+          ],
+        ));
+
+-----------------------------------------------------------------------  
+
+34] GRADIENT :
+
+//lINEAR_gRADIENT
+Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+            colors: [
+              //webgradient.com
+              Color(0xff0250c5),
+              // 0x - begining
+              // ff - transperancy
+              Color(0xffd43f8d),
+            ],
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            // begin: FractionalOffset(0.1,0.0),
+            // end: FractionalOffset(0.8,1.5),
+            // stops: [0.5,0.5]
+          )),
+
+//Radial_Gradient
+ Container(
+      decoration: BoxDecoration(
+          gradient: RadialGradient(
+        colors: [
+          Color(0xff0250c5),
+          Color(0xffd43f8d),
+        ],
+        center: Alignment.topRight,
+        radius: 1.5,
+        // stops: [0.5,0.5]
+      )),
+
+-----------------------------------------------------------------------
+
+35] ClipRRect : 
+
+//help to shape images or some other widget 
+ ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset(
+                'assets/images/madhav1.jpg',
+                width: 300,
+                height: 200,
+                fit: BoxFit.fill,
+              )),
+
+-----------------------------------------------------------------------
+
+36] ANIMATION :
+
+class _HomeScreenState extends State<HomeScreen> {
+  var _heigh  = 100.0;
+  var _wid = 200.0;
+  Color bgc= Colors.lightGreen;
+  bool flag = true;
+  var rad = 20.0 ;
+	  body: 
+ AnimatedContainer(
+            duration: Duration(milliseconds: 1000),
+            height: _heigh,
+            width: _wid,
+            curve: Curves.ease,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(rad),
+              color: bgc,
+            ),
+          ),
+
+ElevatedButton(onPressed: (){
+                setState(() {
+                  if(flag){
+                    _heigh = 200;
+                    _wid = 100;
+                    bgc = Colors.orange;
+                    rad = 20.0;
+                    flag = false;
+                  }
+                  else {
+                  _heigh = 100;
+                  _wid = 200;
+                  bgc = Colors.lightGreen;
+                  rad = 0.0;
+                  flag = true;
+                  }
+
+                });
+
+-----------------------------------------------------------------------
+
+37] ANIMATED_OPACITY :
+
+class _HomeScreenState extends State<HomeScreen> {
+  var op = 1.0;
+  bool flag = true;
+
+ AnimatedOpacity(
+                opacity: op,
+                duration: Duration(seconds: 2),
+                child: Image.asset('assets/images/madhav1.jpg'),
+                curve: Curves.easeInOut,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      if (flag) {
+                        op = 0.0;
+                        flag = false;
+                      } else {
+                        op = 1.0;
+                        flag = true;
+                      }
+                    });
+                  },
+
+-----------------------------------------------------------------------
+
+38] ANIMATED_CROSS_FADE :
+
+class _HomeScreenState extends State<HomeScreen> {
+  var op = 1.0;
+  bool flag = true;
+
+ AnimatedCrossFade(
+                  firstChild: Container(
+                    width: 350,
+                    height: 300,
+                    color: Colors.orange,
+                  ),
+                  secondChild: Image.asset('assets/images/madhav1.jpg'),
+                  crossFadeState: flag
+                      ? CrossFadeState.showFirst
+                      : CrossFadeState.showSecond,
+                  sizeCurve: Curves.bounceIn,
+                  firstCurve: Curves.easeInOutBack,
+                  secondCurve: Curves.slowMiddle,
+                  duration: Duration(seconds: 1)),
+              ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      if (flag) {
+                        flag = false;
+                      } else {
+                        flag = true;
+                      }
+                    });
+
+-----------------------------------------------------------------------
+
+39] ListWheelScrollView : 
+
+
+class _HomeScreenState extends State<HomeScreen> {
+  var lis = [
+    {'name': 'Pratik', 'phone': '79770805', 'age': '23'},
+    {'name': 'Tejas', 'phone': '78455805', 'age': '19'},
+}
+
+ body: ListWheelScrollView(
+        itemExtent: 100, // item height
+        children: lis
+            .map((e) => Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.orange,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        child: Icon(Icons.person),
+                        radius: 20,
+                      ),
+                      title: Text(
+                        e['name'].toString(),
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      subtitle: Text(
+                        e['phone'].toString(),
+                        style: TextStyle(color: Colors.grey.shade900),
+                      ),
+                      trailing: CircleAvatar(
+                        child: Text(e['age'].toString()),
+                        radius: 15,
+                      ),
+                    ),
+                  ),
+                ))
+            .toList(),
+      ),
+
+-----------------------------------------------------------------------
+
+40] HERO :
+
+ Container(
+            width: 350,
+            height: 200,
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => second(),
+                    ));
+              },
+              child: Hero(
+                  tag: 'trans1', child: Image.asset('assets/images/madhav1.jpg')),
+            ),
+          ),
+        )
+
+second screen : 
+
+ body: Hero(
+        tag: 'trans1',
+          child: Image.asset('assets/images/madhav1.jpg')),
+
+-----------------------------------------------------------------------
+
+41] ANIMATION : 
+
+
+class _HomeScreenState extends State<HomeScreen>
+with SingleTickerProviderStateMixin{
+  late Animation animation;
+  late AnimationController controller ;
+  late Animation colorAnimation;
+  @override
+  void initState() {
+
+    super.initState();
+    controller = AnimationController(vsync: this,duration: Duration(seconds: 4));
+    animation = Tween(begin:  50.0 , end:  200.0,).animate(controller);
+    colorAnimation = ColorTween(begin: Colors.orange,end: Colors.lightGreen).animate(controller);
+  }
+
+body:
+        Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: animation.value,
+                height: animation.value,
+                color: colorAnimation.value,
+              ),
+             
+              ElevatedButton(onPressed: (){
+                controller.addListener(() {
+                  setState(() {
+
+                  });
+                });
+                controller.forward();
+
+              }, child: Text('change')),
+            ],
+          ),
+        )
+
+-----------------------------------------------------------------------
+
+42] RIPPLE EFFECT :
+
+
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  late Animation animation;
+
+  late AnimationController controller;
+  var lis = [120.0, 140.0, 160.0, 180.0];
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+        vsync: this, duration: Duration(seconds: 4), lowerBound: 0.5);
+    animation = Tween(begin: 0.0, end: 1.0).animate(controller);
+    controller.addListener(() {
+      setState(() {});
+    });
+    controller.forward();
+  }
+
+body: 
+   Center(
+          child: Stack(
+            alignment: Alignment.center,
+            children: lis
+                .map((values) => Container(
+                      width: values * animation.value,
+                      height: values * animation.value,
+                      decoration: BoxDecoration(
+                        color: Colors.blueAccent
+                            .withOpacity(1.0 - animation.value),
+                        shape: BoxShape.circle,
+                      ),
+                    ))
+                .toList(),
+          ),
+        )
+
+Altername Method :
+
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  late Animation animation;
+
+  late AnimationController controller;
+  var lis = [120.0, 140.0, 160.0, 180.0];
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+        vsync: this, duration: Duration(seconds: 2), lowerBound: 0.5);
+    animation = Tween(begin: 0.0, end: 1.0).animate(controller);
+  }
+
+ body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Stack(alignment: Alignment.center, children: [
+                myContainer(lis[0]),
+                myContainer(lis[1]),
+                myContainer(lis[2]),
+                myContainer(lis[3]),
+                Icon(
+                  Icons.call,
+                  color: Colors.orange.withOpacity(1.0 - animation.value),
+                  size: 34,
+                ),
+              ]),
+              ElevatedButton(
+                  onPressed: () {
+                    controller.addListener(() {
+                      setState(() {});
+                    });
+                    controller.forward();
+                  },
+                  child: Text('Change'))
+            ],
+          ),
+        ));
+  }
+
+  Widget myContainer(values) {
+    return Container(
+      width: values * animation.value,
+      height: values * animation.value,
+      decoration: BoxDecoration(
+        color: Colors.blueAccent.withOpacity(1.0 - animation.value),
+        shape: BoxShape.circle,
+      ),
+    );
+  }
+}
+
+-----------------------------------------------------------------------
+
+43] SHARED PREF : 
+
+//Add dependencies for shared preference
+//shared_preferences: ^2.2.2
+
+class _HomeScreenState extends State<HomeScreen> {
+  var finalName = "";
+  var edit1 = TextEditingController();
+  static const String KEYWORD = "name";
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+body :
+ ElevatedButton(
+                  onPressed: () async {
+                    var preferance = await 					    SharedPreferences.getInstance();
+                    preferance.setString(KEYWORD, 				    edit1.text.toString());
+                    },
+                    child: Text('Login')
+		    ),
+ Text(
+                '$finalName',
+                style: TextStyle(
+                  fontSize: 25,
+                ),
+              ),
+
+void getData() async {
+    var preference = await SharedPreferences.getInstance();
+
+    var getString = preference.getString(KEYWORD);
+    // finalName = getString!;
+    finalName = getString != null ? getString : "No Current User ";
+    setState(() {});
+  }
+
+----------------------------------------------------------------------- 
+
+44] DRAWER : 
+
+ return Scaffold(
+	drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.indigo,
+              ),
+              accountName: Text("Daily Routine"),
+              accountEmail: Text('ppsutar044@gmail.com'),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.white,
+                radius: 28,
+                child: CircleAvatar(
+                  radius: 35,
+                  backgroundImage: AssetImage('assets/images/img.png'),
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text('Account'),
+              subtitle: Text('Personal'),
+              trailing: Icon(Icons.edit),
+            ),
+            ListTile(
+              leading: Icon(Icons.email),
+              title: Text('Email'),
+              subtitle: Text('ppsutar044@hmail.com'),
+              trailing: Icon(Icons.send),
+            ),
+            
+          ],
+        ),
+      ),
+
+-----------------------------------------------------------------------
+
+45] HTTP and API :
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+    flutter_lints: ^2.0.0
+    http: ^1.2.0
+
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+ final url = "https://jsonplaceholder.typicode.com/photos";
+  var data;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getData();
+  }
+
+getData() async {
+    var res = await http
+        .get(Uri.parse("https://jsonplaceholder.typicode.com/photos"));
+    data = jsonDecode(res.body);
+    setState(() {});
+  }
+
+body: data != null
+            ? ListView.builder(
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(data[index]["url"]),
+                    ),
+                    title: Text(data[index]["title"]),
+                    subtitle: Text('ID : ${data[index]["id"]}'),
+                  );
+                },
+                itemCount: data.length)
+            : Center(
+                child: CircularProgressIndicator(
+                  color: Colors.indigo,
+                ),
+              ));
+  }
+
+-----------------------------------------------------------------------
+
+46] SNACK BAR : 
+
+void showErrorMessage(String myString) {
+    final err = SnackBar(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+      ),
+      duration: Duration(seconds: 1),
+      content: Text(
+        myString,
+        style: TextStyle(color: Colors.white),
+      ),
+      backgroundColor: Colors.red,
+    );
+    ScaffoldMessenger.of(context).showSnackBar(err);
+  }
+
+-----------------------------------------------------------------------
+
+47] POP UP MENU : 
+
+PopupMenuButton(
+                icon: Icon(
+                  Icons.more_horiz,
+                  size: 25,
+                ),
+                onSelected: (value) {
+                  if (value == 'edit') {
+                  } else if (value == 'delete') {
+                    deleteId(id);
+                  }
+                },
+                itemBuilder: (context) {
+                  return [
+                    PopupMenuItem(child: Text("Edit"), value: 'edit'),
+                    PopupMenuItem(
+                      child: Text('Delete'),
+                      value: 'delete',
+                    ),
+                  ];
+                },
+              ),
+
+-----------------------------------------------------------------------
+
+48] DISMISSIBLE : 
+
+Dismissible(
+              onDismissed: (direction) {
+                bool status = direction == DismissDirection.startToEnd;
+                if (status) {
+                  ShowMySnackBar(widget.fruits[index], status);
+                } else {
+                  ShowMySnackBar(widget.fruits[index], status);
+                }
+              },
+              key: Key(widget.fruits[index]),
+              background: Container(
+                color: Colors.green,
+                child: Icon(
+                  Icons.save_alt,
+                  color: Colors.white,
+                ),
+              ),
+              child: Container(
+                color: Colors.grey.shade300,
+                height: 50,
+                child: Center(child: Text(widget.fruits[index])),
+              ),
+              secondaryBackground: Container(
+                child: Icon(Icons.delete),
+                color: Colors.red,
+              ),
+            )
+
+-----------------------------------------------------------------------
+
+49] ALERT BOX : 
+
+Future<void> showMyDialog(BuildContext context, int index) async {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Are you shour you want to delete it ? "),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                Text('This action cant be undo'),
+                Text("So make shour"),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  widget.fruits.removeAt(index);
+                  setState(() {});
+                  Navigator.pop(context);
+                },
+                child: Text("Submit")),
+            TextButton(onPressed: () {}, child: Text("Cancel"))
+          ],
+        );
+      },
+    );
+  }
+
+-----------------------------------------------------------------------
+
+50] MODEL BOTTOM SHEET : 
+
+onPressed: () {
+                    showBottomMenu(context);
+
+Future<void> showBottomMenu(BuildContext context) async {
+    return showModalBottomSheet(
+      // backgroundColor: Colors.orange,
+      barrierColor: Colors.black.withOpacity(0.7),
+      elevation: 0,
+      enableDrag: true,
+      isDismissible: false,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20)
+          )
+      ),
+      context: context,
+      builder: (context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              title: Text("Delete"),
+              subtitle: Text("permenent delete"),
+            ),
+            ListTile(
+              title: Text("Save"),
+              subtitle: Text("save local"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+-----------------------------------------------------------------------
+
+51] ANIMATED TEXT KIT : 
+
+a] ROTATE
+
+Row(
+                    children: [
+                      SizedBox(
+                        width: 80,
+                      ),
+                      Text(
+                        "Iam ",
+                        style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.grey.shade900),
+                      ),
+                      DefaultTextStyle(
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.grey.shade700,
+                            fontFamily: 'Horizon',
+                            fontWeight: FontWeight.w700,
+                          ),
+                          child: AnimatedTextKit(
+                              totalRepeatCount: 8,
+                              pause: Duration(seconds: 1),
+                              displayFullTextOnTap: true,
+                              stopPauseOnTap: true,
+                              animatedTexts: [
+                                RotateAnimatedText("Yaashvi",
+                                    duration: Duration(seconds: 5)),
+                                RotateAnimatedText("Santosh",
+                                    duration: Duration(seconds: 5)),
+                                RotateAnimatedText("Mene",
+                                    duration: Duration(seconds: 5)),
+                              ]))
+                    ],
+                  ),
+
+b] TYPE WRITER ANIMATION : 
+
+chil: DefaultTextStyle(
+                    style: TextStyle(
+                        fontSize: 30,
+                        color: Colors.grey.shade700,
+                        fontFamily: 'Horizon'),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: AnimatedTextKit(
+                          stopPauseOnTap: true,
+                          displayFullTextOnTap: true,
+                          pause: Duration(seconds: 2),
+                          totalRepeatCount: 1,
+                          // repeatForever: true,
+                          animatedTexts: [
+                            TyperAnimatedText("Developer Information",
+                                textStyle: TextStyle(fontFamily: 'Horizon')),
+                            TyperAnimatedText(
+                                "Pratik Prashant Sutar \n BE \nComputer Engineering",
+                                textAlign: TextAlign.center,
+                                speed: Duration(milliseconds: 200)),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+
+c] COLORIZE ANIMATION : 
+
+child: AnimatedTextKit(
+                      isRepeatingAnimation: true,
+                      repeatForever: true,
+                      pause: Duration(milliseconds: 50),
+                      animatedTexts: [
+                        ColorizeAnimatedText(
+                          "Daily Routine",
+                          textStyle: myStyle(),
+                          colors: colorizeColor,
+                          speed: Duration(milliseconds: 500),
+                        ),
+                        ColorizeAnimatedText("Be Logical",
+                            textStyle: myStyle(),
+                            colors: colorizeColor,
+                            speed: Duration(milliseconds: 500))
+                      ],
+                    ),
+
+-----------------------------------------------------------------------
+
+52] BOTTOM NAVIGATION BAR : 
+
+class _bottomHomeState extends State<bottomHome> {
+  int selected_index = 0;
+  PageController pageController = PageController();
+
+  // List<Widget> myWidget = [
+  //   Text("Home_Screen",style: TextStyle(fontFamily: 'myStyle')),
+  //   Text("Search_Screen"),
+  //   Text("Add_Screen"),
+  //   Text("Profile_Screen"),
+  // ];
+
+  void selected(int index) {
+    selected_index = index;
+    setState(() {
+      pageController.jumpToPage(selected_index);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: selected_index != 0
+          ? AppBar(
+              title: Text("demos_7"),
+              centerTitle: true,
+              backgroundColor: Colors.indigo,
+            )
+          : null,
+      body:
+          //Center(child: myWidget.elementAt(selected_index)),
+          PageView(
+        onPageChanged: (value) {
+          selected(value);
+        },
+        controller: pageController,
+        children: [
+          animatedText(),
+          search_scree(),
+          add_screen(),
+          profile_screen(),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+          BottomNavigationBarItem(icon: Icon(Icons.add), label: "Add"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+        ],
+        currentIndex: selected_index,
+        selectedItemColor: Colors.green,
+        unselectedItemColor: Colors.grey,
+        onTap: selected,
+      ),
+    );
+  }
+
+-----------------------------------------------------------------------
+
+53] DROP DOWN MENU / SPINNER 
+
+class _search_screeState extends State<search_scree> {
+  var selectedValues;
+  final options = ["Orange", "Apple", "Strawberry", "Blueberry",];
+
+body:
+Center(
+Container(
+child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    isExpanded: true,
+                    borderRadius: BorderRadius.circular(10),
+                    // function need to modify
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedValues = newValue!;
+                      });
+                    },
+                    value: selectedValues,
+                    icon: Icon(
+                      Icons.arrow_drop_down),
+                    hint: Text("Select Fruit"),
+                    items: [
+                      DropdownMenuItem(
+                          child: Text(options[0]), value: options[0]),
+                      DropdownMenuItem(
+                          child: Text(options[1]), value: options[1]),
+                      DropdownMenuItem(
+                          child: Text(options[2]), value: options[2]),
+                      DropdownMenuItem(
+                          child: Text(options[3]), value: options[3]),
+                    ],
+                  ),
+                ),
+
+-----------------------------------------------------------------------
+
+54] TAB BAR : 
+
+ Widget build(BuildContext context) {
+    return DefaultTabController(
+        initialIndex: 1,
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(
+              "WhatsApp",
+            ),
+            bottom: TabBar(
+              tabs: [
+                Tab(
+                  icon: Icon(Icons.chat),text: "Chats",
+                ),
+                Tab(
+                  icon: Icon(Icons.camera_rounded),text: "Status",
+                ),
+                Tab(
+                  icon: Icon(Icons.call),text: "Call",
+                )
+              ],
+              indicatorColor: Colors.black,
+              indicatorSize: TabBarIndicatorSize.tab,
+              indicatorWeight: 3,
+              labelColor: Colors.white,
+              unselectedLabelColor: Colors.grey.shade400,
+            ),
+            backgroundColor: Color(0xff075E54),
+          ),
+          body: TabBarView(
+            children: [
+              animatedText(), //Screen
+              search_scree(), //Screen
+              Container(
+                child: Center(child: Text('Call')),
+              ),
+            ],
+          ),
+        ));
+  }
+
+-----------------------------------------------------------------------
+
+55] IMAGE PICKER :
+
+dev_dependencies:
+	mage_picker: ^1.0.8
+
+class _profile_screenState extends State<profile_screen> {
+  ImagePicker imagePicker = ImagePicker();
+  XFile? file;
+  List<XFile>? multiFile;
+
+// FOR SINGLE IMAGE
+ ElevatedButton(
+                  onPressed: () async {
+                    final XFile? photo = await imagePicker.pickImage(
+                        source: ImageSource.gallery);
+                    setState(() {
+                      file = photo;
+                    });
+                  },
+child: Container(
+                  height: 300,
+                  width: double.maxFinite,
+                  child: Center(
+                      child: file == null
+                          ? Text(
+                              "Nothing Selected ! ",
+                              style: TextStyle(
+                                  fontSize: 25,
+                                  color: Colors.grey.shade600,
+                                  fontWeight: FontWeight.w700),
+                            )
+                          : Image.file(
+                              File(file!.path),
+                              fit: BoxFit.fill,
+                            )),
+
+// FOR MULTIPLE IMAGES
+ElevatedButton(
+                  onPressed: () async {
+                    final List<XFile>? photos =
+                        await imagePicker.pickMultiImage();
+                    setState(() {
+                      multiFile = photos;
+                    });
+                  },
+
+ Container(
+                height: 300,
+                width: double.maxFinite,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: multiFile!.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.file(File(multiFile![index].path)),
+                    );
+
+-----------------------------------------------------------------------
+
+			STATE MANAGENMENT
+
+1] PROVIDERS :
+
+Import in pubs.yaml 
+
+make a model class
+
+import 'package:flutter/cupertino.dart';
+
+class NumberListProvider extends ChangeNotifier {
+  List<int> myList = [0];
+
+  void inc(){
+    int last = myList.last +1;
+    myList.add(last);
+    notifyListeners();  			//this work like setstate
+  }
+
+}
+
+in main.dart wrap Material app with MultiProvider
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(			// SingleProvider (option)
+      providers: [				//list of providers
+      ChangeNotifierProvider(create: (context) => NumberListProvider(),), 
+    ],
+      child: MaterialApp(
+        theme: ThemeData(),
+        debugShowCheckedModeBanner: false,
+        home: const HomeScreen(),
+      ),
+    );
+  }
+
+To use the provider wrap the widget or ideally the whole scafold widget with Consumer widget and mention its type
+
+ Consumer<NumberListProvider>(
+
+//in boilder the middle one is value or you can put any anme 
+
+      builder:(context, myModel, child) =>  Scaffold(
+        appBar: AppBar(title: Text("third"),centerTitle: true,),
+        body: Column(
+          children: [
+            Text(myModel.myList.last.toString(),style: const TextStyle(fontSize: 50,fontWeight: FontWeight.w700),),
+            Expanded(
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+          
+-------------------------------------------------------------------------------
+2] RIVERPOD :
+
+void main(){
+
+   runApp(const ProviderScope(child: myApp()));		//WRAP THE APP WITH 
+}
+class myApp extends StatelessWidget {
+  const myApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return  const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Home(),
+    );
+  }
+}
+
+
+ref.read() 	//used to read the value only at once 
+ref.watch()	//used to continousely watch the changes
+
+//we use .notifier to modify the values
+ref.read(nameProvider.notifier).update((state)=>value)
+
+
+1] USING CONSUMER WIDGET 
+
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final msgProvider = Provider<String>((ref) => "Hello World");
+
+class Home extends StatelessWidget {
+  const Home({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+          child: Consumer(builder: (context, ref, child) {
+            final name = ref.watch(msgProvider);
+          return   Text(name,
+              style: const TextStyle(fontSize: 20),
+            );
+          }
+
+          )),
+    );
+  }
+}
+
+2] IN ConsumerStatefulWidget : 
+
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final msgProvider = Provider<String>((ref) => "Hello World");
+
+// IN ConsumerStatefulWidget WE GET ref INSIDE
+class Home extends ConsumerStatefulWidget {
+  const Home({super.key});
+
+  @override
+  ConsumerState<Home> createState() => _HomeState();
+}
+
+class _HomeState extends ConsumerState<Home> {
+  @override
+  Widget build(BuildContext context) {
+    final msg = ref.watch(msgProvider);
+    return Scaffold(
+      body: Center(
+        child: Text(
+          msg,
+          style: const TextStyle(fontSize: 20),
+        ),
+      ),
+    );
+  } 
+}
+
+
+3]STATE_PROVIDER : 
+ Widget build(BuildContext context, WidgetRef ref) {
+    final myVal = ref.watch(myMsg);
+
+//LISTEN THE VALUE OF PROVIDER AND CAN PROVIDE THE ACTIONS
+    ref.listen(myMsg, (previous, next) {
+      if(next==10){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("printing")));
+      } 
+
+    });
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Counter"),
+        backgroundColor: Colors.blue,
+        actions: [
+          IconButton(
+              onPressed: () {
+					//WAYS TO RESET THE PROVIDER
+                ref.invalidate(myMsg);
+                ref.refresh(myMsg);
+              },
+              icon: Icon(Icons.refresh))
+        ],
+      ),
+      body: Center(
+          child: Text(
+        myVal.toString(),
+        style: TextStyle(fontSize: 50),
+      )),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+
+					//WAYS TO UPDATE THE STATE VALUE
+        ref.read(myMsg.notifier).state++;
+        ref.read(myMsg.notifier).update((state) => state + 1);
+  
+      },
+        child: Icon(Icons.add),
+      ),
+    );
+
+4]STATE_NOTIFIER_PROVIDER : 
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+class CarModel extends StateNotifier<int>{
+  CarModel():super(0);
+  void increment() {
+    state++;
+  }
+}
+
+final carProvider = StateNotifierProvider<CarModel,int>((ref) => CarModel());
+class Home extends ConsumerWidget {
+  const Home({super.key});
+
+  @override
+  Widget build(BuildContext context,WidgetRef ref) {
+    final myVal = ref.watch(carProvider);
+    return Scaffold(
+        body: Center(child: Text('$myVal',style: TextStyle(fontSize: 50),),),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {
+        ref.read(carProvider.notifier).increment();
+      }),
+    );
+  }
+}
+
+5] FUTURE PROVIDER 
+
+class APIServices {					// API CLASS
+  String endpoint = "https://reqres.in/api/users?page=1";
+  Future<List<UserModel>> getUser()async{
+        Response response = await get(Uri.parse(endpoint));
+        if(response.statusCode == 200){
+          final List res = jsonDecode(response.body)['data'];
+          return res.map(((e) => UserModel.fromJson(e))).toList();
+        }
+        else {
+         throw Exception(response.reasonPhrase);
+        }
+  }
+}
+
+class UserModel {					// DATA MODEL
+  final String id;
+  final String email;
+  final String firstname;
+  final String lastName;
+  final String avatar;
+
+  UserModel(
+      {required this.id,
+      required this.email,
+      required this.firstname,
+      required this.lastName,
+      required this.avatar});
+
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+        id: json['id'].toString(),
+        email: json['email'],
+        firstname: json['first_name'],
+        lastName: json['last_name'],
+        avatar: json['avatar']);
+  }
+}
+
+							// UI FILE
+final apiProvider = Provider<APIServices>(
+  (ref) => APIServices(),
+);
+
+final userDataProvider = FutureProvider<List<UserModel>>((ref) {
+  return ref.read(apiProvider).getUser();
+});
+
+class Home extends ConsumerWidget {
+  const Home({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userData = ref.watch(userDataProvider);
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("API"),
+          backgroundColor: Colors.blue,
+        ),
+        body: userData.when(
+          data: (data) {
+            return ListView.builder(
+              itemCount: data.length,
+              itemBuilder: ((context, index) {
+                final user = data[index];
+                return ListTile(
+                  leading: CircleAvatar(backgroundImage: NetworkImage(user.avatar),
+                    radius: 25,
+                  ),
+                );
+              }),
+            );
+          },
+          error: (error, stackTrace) => Text(error.toString()),
+          loading: () => const CircularProgressIndicator(),
+        ));
+  }
+}
+
+6] family 
+
+//globally 
+	final nameProvider = Provider.family<String,String>((ref,name) => 	"Hello $name",);
+//in build 
+ final name = ref.watch(nameProvider("Pratik"));
+
+
+
+7] Equatable (passing multiple parameter from family provider)
+ //add equatablr dependency in pubspec.yaml
+ // exted the class with desire parameters as much as you want 
+	
+	class user extends Equatable {
+  	final String name;
+ 	 final String lastName;
+ 	 user(this.name,this.lastName);
+
+	  @override
+  	// TODO: implement props
+  	List<Object?> get props => [name,lastName];
+	}
+
+	final equatableProvider = Provider.family<String,user>((ref,userObject) 	{
+ 	   return "Hello ${userObject.name} of family ${userObject.lastName}";
+	});
+
+//in build function
+	final message = ref.watch(equatableProvider(user("Pratik", "Sutar")));
+
+
+8]Build runner :
+
+ @riverpod
+String name(NameRef ref){
+  return "Pratik Sutar";
+}
+
+
+//after writing this run the 
+dart run build_runner watch 
+ 
+to make it keepAlive type of provider 
+@Riverpod(keepalive: true)
+//code for provider
+
+
+9]Notifier and notifierProvider 
+
+class CounterNotifier extends Notifier<int> {
+  @override
+  int build() {
+    // TODO: implement build
+    return 0;
+  }
+
+  void increment() {
+    state++;
+  }
+
+  void decrement() {
+    state--;
+  }
+}
+
+//NotifierProvider
+final CounterNotifierProvider = NotifierProvider<CounterNotifier, int>(
+  () {
+    return CounterNotifier();
+  },
+);
+
+//in screen Page 
+final count = ref.watch(CounterNotifierProvider);
+
+
+
+10] Notifier and notifierProvider(using generator):
+ @riverpod
+class CounterNotifier extends _$CounterNotifier {
+  @override
+  int build(){
+    return 1;
+  }
+
+  void increment(){
+    state++;
+  }
+
+  void decrement(){
+    state--;
+  }
+}
+
+//then run dart run build_runner watch

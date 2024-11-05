@@ -1,0 +1,49 @@
+git repository 
+
+1)
+First come in your chosen file location
+PS C:\Users\ppsut\C programming> 
+
+2)
+Then write
+- git init
+PS C:\Users\ppsut\C programming> git init
+so now it will turn into a git repository
+
+3)
+add files in that folder if it is empty
+
+4)
+now we can see the status of our files using 
+-git status
+
+5)
+to add the untracked files we can use the command
+-git add . 					 // will select all the files available
+-git add File_Name 
+
+6)
+Now after add command files move to the staging part 
+To commit files use
+-git commit -m "MESSAGE"
+
+7)
+To add the Git repository we use first create the repo in Git then copy thr https link 
+use command 
+-git remote add origin HTTPS_LINK
+
+8)
+To verify git remote use command 
+-git remote -v
+
+9)
+to check our current branch we use 
+-git branch 
+
+10)
+to rename our branch which is "Master" by default to change into "Main"
+git branch -M main
+
+11)
+Now we are ready to push our code on the main branch 
+-git push origin main

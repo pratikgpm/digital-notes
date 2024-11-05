@@ -1,0 +1,28 @@
+FIREBASE connection using (CLI)
+
+1] Create a Firebase project first in the Firebase console
+
+2]Make sure you have node installed on your device
+  type in cmd - 
+ 1. npm install -g firebase-tools
+ 2. dart pub global activate flutterfire_cli
+ 
+3] In the project terminal run 
+   flutterfire configure
+  now choose the project(firebase)  you want to configure with current project
+  and choose  platform
+  (android, ios, web, macOS, windows)
+
+4] In 
+   android/app/src/build.gradel
+   defaultCongig{...
+   .....
+   multiDexEnabled true 				//add this line
+  
+   }
+
+5] add firebase_core in pubs.yaml 
+   flutter pub add firebase_core
+
+6] in main() make it async
+   

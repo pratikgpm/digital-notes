@@ -1,0 +1,16 @@
+				TWITTER CLONE
+
+Flutter Riverpod
+Appwrite
+Docker
+
+1] install docker
+2] use app write web command in cmd to install the appwrite
+3] close appwrite: 
+   docker compose stop
+
+
+   open appwrite :
+   docker compose up -d --remove-orphans
+
+4]
